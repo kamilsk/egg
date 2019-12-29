@@ -1,6 +1,8 @@
 > # 🐣 egg
 >
-> Extended go get - alternative for standard "go get" with a few little but useful features.
+> Extended go get - alternative for the standard "go get" with a few little but useful features.
+
+[![Build][build.icon]][build.page]
 
 ## 💡 Idea
 
@@ -39,3 +41,8 @@
 ---
 
 made with ❤️ for everyone
+
+[build.icon]:       https://travis-ci.org/kamilsk/egg.svg?branch=master
+[build.page]:       https://travis-ci.org/kamilsk/egg
+
+[promo.page]:       https://github.com/kamilsk/egg
