@@ -36,7 +36,11 @@
 
 ## 🤲 Outcomes
 
-...
+### Patches
+
+- [github.com/izumin5210/gex](https://github.com/izumin5210/gex)
+  - [fork](https://github.com/izumin5210/gex/compare/master...kamilsk:extended)
+  - [replacement](https://github.com/kamilsk/egg/blob/f595909e1590aa4ffd286641491165c636690698/go.mod#L11)
 
 ---
 

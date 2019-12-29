@@ -12,7 +12,7 @@ archives:
 
 brews:
 - name: egg
-  description: Extended go get - alternative for standard "go get" with a few little but useful features.
+  description: Extended go get - alternative for the standard "go get" with a few little but useful features.
   homepage: https://github.com/kamilsk/egg
   commit_author:
     name:  Kamil Samigullin

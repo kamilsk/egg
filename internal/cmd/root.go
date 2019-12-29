@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/kamilsk/egg/internal/cmd/deps"
+	"github.com/kamilsk/egg/internal/cmd/make"
 	"github.com/kamilsk/egg/internal/cmd/tools"
 	"github.com/kamilsk/egg/internal/cmd/vanity"
 )
@@ -20,7 +21,7 @@ func New(output io.Writer) *cobra.Command {
 		SilenceErrors: false,
 		SilenceUsage:  true,
 	}
-	cmd.AddCommand(deps.New(), tools.New(), vanity.New())
+	cmd.AddCommand(deps.New(), make.New(), tools.New(), vanity.New())
 	cmd.SetOut(output)
 	return cmd
 }

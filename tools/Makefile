@@ -2,50 +2,38 @@
 
 SHELL = /bin/bash -euo pipefail
 
+BINPATH     = $(shell dirname $(PWD))/bin
 GO111MODULE = on
 GOFLAGS     = -mod=vendor
 GOPRIVATE   =
 GOPROXY     = direct
-GOTAGS      = -tags integration,tools
+GOTAGS      = -tags tools
 MODULE      = $(shell go list -m)
-PACKAGES    = $(shell go list $(GOTAGS) ./...)
-PATHS       = $(shell go list $(GOTAGS) ./... | sed -e "s|$(shell go list -m)/\{0,1\}||g")
-TIMEOUT     = 1s
-VENDOR      = $(dir $(MODULE))
-
-.PHONY: go-env
-go-env:
-	@echo "GO111MODULE: $(shell go env GO111MODULE)"
-	@echo "GOFLAGS:     $(strip $(shell go env GOFLAGS))"
-	@echo "GOPRIVATE:   $(strip $(shell go env GOPRIVATE))"
-	@echo "GOPROXY:     $(strip $(shell go env GOPROXY))"
-	@echo "GOTAGS:      $(GOTAGS)"
-	@echo "MODULE:      $(MODULE)"
-	@echo "PACKAGES:    $(PACKAGES)"
-	@echo "PATHS:       $(strip $(PATHS))"
-	@echo "TIMEOUT:     $(TIMEOUT)"
-	@echo "VENDOR:      $(VENDOR)"
-
-BINPATH = $(shell dirname $(PWD))/bin
 
 export PATH := $(BINPATH):$(PATH)
 
 .PHONY: tools-env
 tools-env:
 	@echo "BINPATH:     $(BINPATH)"
+	@echo "GO111MODULE: $(shell go env GO111MODULE)"
+	@echo "GOFLAGS:     $(strip $(shell go env GOFLAGS))"
+	@echo "GOPRIVATE:   $(strip $(shell go env GOPRIVATE))"
+	@echo "GOPROXY:     $(strip $(shell go env GOPROXY))"
+	@echo "GOTAGS:      $(GOTAGS)"
+	@echo "MODULE:      $(MODULE)"
 
 .PHONY: deps
 deps:
-	@go mod tidy && go mod vendor && go mod verify
+	@GOPRIVATE=$(GOPRIVATE) go mod tidy && go mod vendor
 
 .PHONY: update
 update:
-	@go get $(GOTAGS) -mod= -u
+	@GOPRIVATE=$(GOPRIVATE) go get -tags tools -mod= -u
 
 .PHONY: install
 install:
-	@ROOT=$(dir $(BINPATH)) go generate ./tools.go
+	@GOPRIVATE=$(GOPRIVATE) ROOT=$(dir $(BINPATH)) go generate ./tools.go
 
 
 .PHONY: env
-env: go-env tools-env
+env: tools-env
