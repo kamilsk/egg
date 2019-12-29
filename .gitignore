@@ -1,0 +1,6 @@
+# code coverage and quality reports
+*.out
+
+# binaries
+/bin/*
+!/bin/activate
