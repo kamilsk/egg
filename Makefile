@@ -74,10 +74,6 @@ test-with-coverage-profile:
 build:
 	@go build -o $(BINARY) $(LDFLAGS) .
 
-.PHONY: dist
-dist:
-	@godownloader .goreleaser.yml > .github/install.sh
-
 
 .PHONY: env
 env: go-env build-env
