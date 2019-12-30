@@ -20,19 +20,32 @@
 
 ### Homebrew
 
-...
+```bash
+$ brew install kamilsk/tap/egg
+```
 
 ### Binary
 
-...
+```bash
+$ curl -sSL https://bit.ly/-chicken- | sh
+# or
+$ wget -qO- https://bit.ly/-chicken- | sh
+```
 
 ### Source
 
-...
+```bash
+$ go get -u github.com/kamilsk/egg
+# or
+$ egg tools add github.com/kamilsk/egg
+```
 
 ### Bash and Zsh completions
 
-...
+```bash
+$ egg completion bash > /path/to/bash_completion.d/egg.sh
+$ egg completion zsh  > /path/to/zsh-completions/_egg.zsh
+```
 
 ## 🤲 Outcomes
 
