@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"io"
-
 	"github.com/spf13/cobra"
 
 	"github.com/kamilsk/egg/internal/cmd/deps"
@@ -12,7 +10,7 @@ import (
 )
 
 // New returns the new root command.
-func New(output io.Writer) *cobra.Command {
+func New() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "egg",
 		Short: "Extended go get",
@@ -22,6 +20,5 @@ func New(output io.Writer) *cobra.Command {
 		SilenceUsage:  true,
 	}
 	cmd.AddCommand(deps.New(), make.New(), tools.New(), vanity.New())
-	cmd.SetOut(output)
 	return cmd
 }

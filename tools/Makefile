@@ -36,4 +36,4 @@ install:
 
 .PHONY: update
 update:
-	@go get -mod= -u $(shell $(GO) run $(BINPATH)/deps.go)
+	@$(GO) get -mod= -u $(shell egg deps list)

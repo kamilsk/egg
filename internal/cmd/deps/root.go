@@ -8,6 +8,6 @@ func New() *cobra.Command {
 		Short: "Manage dependencies",
 		Long:  "Manage dependencies.",
 	}
-	cmd.AddCommand(NewCheckCommand())
+	cmd.AddCommand(NewCheckCommand(), NewListCommand())
 	return cmd
 }
