@@ -2,9 +2,6 @@
 github.com/BurntSushi/toml
 # github.com/OpenPeeDeeP/depguard v1.0.1
 github.com/OpenPeeDeeP/depguard
-# github.com/alecthomas/participle v0.4.2-0.20191220090139-9fbceec1d131
-github.com/alecthomas/participle
-github.com/alecthomas/participle/lexer
 # github.com/bombsimon/wsl/v2 v2.0.0
 github.com/bombsimon/wsl/v2
 # github.com/davecgh/go-spew v1.1.1
@@ -123,33 +120,21 @@ github.com/hashicorp/hcl/hcl/token
 github.com/hashicorp/hcl/json/parser
 github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
-# github.com/hokaccha/go-prettyjson v0.0.0-20190818114111-108c894c2c0e
-github.com/hokaccha/go-prettyjson
 # github.com/inconshreveable/mousetrap v1.0.0
 github.com/inconshreveable/mousetrap
-# github.com/itchyny/gojq v0.7.0
-github.com/itchyny/gojq
-github.com/itchyny/gojq/cli
-github.com/itchyny/gojq/cmd/gojq
-# github.com/jessevdk/go-flags v1.4.0
-github.com/jessevdk/go-flags
 # github.com/kisielk/gotool v1.0.0
 github.com/kisielk/gotool
 github.com/kisielk/gotool/internal/load
 # github.com/konsorten/go-windows-terminal-sequences v1.0.1
 github.com/konsorten/go-windows-terminal-sequences
-# github.com/lestrrat-go/strftime v1.0.1
-github.com/lestrrat-go/strftime
 # github.com/magiconair/properties v1.8.1
 github.com/magiconair/properties
 # github.com/matoous/godox v0.0.0-20190911065817-5d6d842e92eb
 github.com/matoous/godox
 # github.com/mattn/go-colorable v0.1.4
 github.com/mattn/go-colorable
-# github.com/mattn/go-isatty v0.0.11
+# github.com/mattn/go-isatty v0.0.8
 github.com/mattn/go-isatty
-# github.com/mattn/go-runewidth v0.0.7
-github.com/mattn/go-runewidth
 # github.com/mitchellh/go-homedir v1.1.0
 github.com/mitchellh/go-homedir
 # github.com/mitchellh/mapstructure v1.1.2
@@ -164,8 +149,6 @@ github.com/nbutton23/zxcvbn-go/match
 github.com/nbutton23/zxcvbn-go/matching
 github.com/nbutton23/zxcvbn-go/scoring
 github.com/nbutton23/zxcvbn-go/utils/math
-# github.com/pbnjay/strptime v0.0.0-20140226051138-5c05b0d668c9
-github.com/pbnjay/strptime
 # github.com/pelletier/go-toml v1.2.0
 github.com/pelletier/go-toml
 # github.com/pkg/errors v0.8.1
@@ -210,7 +193,7 @@ github.com/ultraware/funlen
 github.com/ultraware/whitespace
 # github.com/uudashr/gocognit v1.0.1
 github.com/uudashr/gocognit
-# golang.org/x/sys v0.0.0-20191026070338-33540a1f6037
+# golang.org/x/sys v0.0.0-20190922100055-0a153f010e69
 golang.org/x/sys/unix
 # golang.org/x/text v0.3.2
 golang.org/x/text/transform
@@ -276,8 +259,6 @@ golang.org/x/tools/internal/semver
 gopkg.in/ini.v1
 # gopkg.in/yaml.v2 v2.2.7
 gopkg.in/yaml.v2
-# gopkg.in/yaml.v3 v3.0.0-20191120175047-4206685974f2
-gopkg.in/yaml.v3
 # honnef.co/go/tools v0.0.1-2019.2.3
 honnef.co/go/tools/arg
 honnef.co/go/tools/config

@@ -35,6 +35,5 @@ install:
 	@ROOT=$(dir $(BINPATH)) $(GO) generate ./tools.go
 
 .PHONY: update
-update: GODEPS=$(shell $(GO) mod edit -json | gojq '.Require[] | select(.Indirect != true) | .Path')
 update:
-	@go get -mod= -u $(GODEPS)
+	@go get -mod= -u $(shell $(GO) run $(BINPATH)/deps.go)
