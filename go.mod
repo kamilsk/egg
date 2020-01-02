@@ -9,4 +9,4 @@ require (
 	go.octolab.org/toolkit/cli v0.0.6
 )
 
-replace github.com/izumin5210/gex => github.com/kamilsk/gex v0.6.0-e2
+replace github.com/izumin5210/gex => github.com/kamilsk/gex v0.6.0-e3

@@ -11,11 +11,14 @@ func NewBuildCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "build",
 		RunE: func(cmd *cobra.Command, args []string) error {
+			ctx, cancel := context.WithCancel(context.TODO())
+			defer cancel()
+
 			tools, err := cfg.Create()
 			if err != nil {
 				return err
 			}
-			return tools.BuildAll(context.TODO())
+			return tools.BuildAll(ctx)
 		},
 	}
 	return cmd

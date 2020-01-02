@@ -9,6 +9,14 @@ import (
 	"github.com/izumin5210/gex/pkg/manager"
 )
 
+type (
+	Option struct{}
+)
+
+const (
+	SkipBuild byte = 1 << iota
+)
+
 // Repository is an interface for managing and operating tools
 type Repository interface {
 	List(ctx context.Context) ([]Tool, error)
@@ -51,6 +59,8 @@ func (r *repositoryImpl) List(ctx context.Context) ([]Tool, error) {
 func (r *repositoryImpl) Add(ctx context.Context, pkgs ...string) error {
 	r.Log.Println("add", strings.Join(pkgs, ", "))
 
+	option, _ := ctx.Value(Option{}).(byte)
+
 	for _, pkg := range pkgs {
 		if strings.Contains(pkg, "@") {
 			err := r.manager.Add(ctx, pkgs, r.Verbose)
@@ -85,6 +95,9 @@ func (r *repositoryImpl) Add(ctx context.Context, pkgs ...string) error {
 		return errors.Wrap(err, "failed to sync packages")
 	}
 
+	if option&SkipBuild == 1 {
+		return nil
+	}
 	for _, t := range tools {
 		_, err = r.Build(ctx, t)
 		if err != nil {

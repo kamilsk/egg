@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"os/exec"
-	"time"
 
 	"github.com/spf13/cobra"
 )
@@ -42,7 +41,7 @@ func NewListCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "list",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			ctx, cancel := context.WithTimeout(context.TODO(), time.Second)
+			ctx, cancel := context.WithCancel(context.TODO())
 			defer cancel()
 
 			buf := new(bytes.Buffer)

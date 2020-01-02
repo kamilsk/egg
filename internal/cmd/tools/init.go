@@ -17,11 +17,14 @@ func NewInitCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "init",
 		RunE: func(*cobra.Command, []string) error {
+			ctx, cancel := context.WithCancel(context.TODO())
+			defer cancel()
+
 			tools, err := cfg.Create()
 			if err != nil {
 				return err
 			}
-			return tools.Add(context.TODO(), defaults...)
+			return tools.Add(ctx, defaults...)
 		},
 	}
 	return cmd
