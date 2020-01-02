@@ -6,7 +6,7 @@ github.com/davecgh/go-spew/spew
 github.com/inconshreveable/mousetrap
 # github.com/izumin5210/execx v0.1.0
 github.com/izumin5210/execx
-# github.com/izumin5210/gex v0.6.0 => github.com/kamilsk/gex v0.6.0-e1
+# github.com/izumin5210/gex v0.6.0 => github.com/kamilsk/gex v0.6.0-e2
 github.com/izumin5210/gex
 github.com/izumin5210/gex/pkg/manager
 github.com/izumin5210/gex/pkg/manager/dep

@@ -8,11 +8,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewRegenCommand() *cobra.Command {
+func NewRegenCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "regen",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			cfg := gex.Default
 			path := filepath.Join(cfg.RootDir, cfg.ManifestName)
 			m, err := tool.NewParser(cfg.FS, cfg.ManagerType).Parse(path)
 			if err != nil {

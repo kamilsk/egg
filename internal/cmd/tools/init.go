@@ -13,11 +13,11 @@ var defaults = []string{
 	"golang.org/x/tools/cmd/goimports",
 }
 
-func NewInitCommand() *cobra.Command {
+func NewInitCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "init",
 		RunE: func(*cobra.Command, []string) error {
-			tools, err := new(gex.Config).Create()
+			tools, err := cfg.Create()
 			if err != nil {
 				return err
 			}

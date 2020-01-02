@@ -7,11 +7,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewRunCommand() *cobra.Command {
+func NewRunCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "run",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			tools, err := new(gex.Config).Create()
+			tools, err := cfg.Create()
 			if err != nil {
 				return err
 			}
