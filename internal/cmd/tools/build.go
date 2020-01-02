@@ -10,15 +10,15 @@ import (
 func NewBuildCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "build",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(*cobra.Command, []string) error {
 			ctx, cancel := context.WithCancel(context.TODO())
 			defer cancel()
 
-			tools, err := cfg.Create()
+			repository, err := cfg.Create()
 			if err != nil {
 				return err
 			}
-			return tools.BuildAll(ctx)
+			return repository.BuildAll(ctx)
 		},
 	}
 	return cmd

@@ -10,33 +10,16 @@ import (
 func NewRunCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "run",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			ctx, cancel := context.WithCancel(context.TODO())
 			defer cancel()
 
-			tools, err := cfg.Create()
+			repository, err := cfg.Create()
 			if err != nil {
 				return err
 			}
-			return tools.Run(ctx, args[0], args[1:]...)
+			return repository.Run(ctx, args[0], args[1:]...)
 		},
 	}
 	return cmd
 }
-
-var (
-	_ = []string{
-		"github.com/golang/mock/mockgen",
-		"github.com/golangci/golangci-lint/cmd/golangci-lint",
-		"golang.org/x/tools/cmd/goimports",
-	}
-	_ = []string{
-		"github.com/golang/protobuf/protoc-gen-go",
-		"github.com/gogo/protobuf/protoc-gen-gofast",
-	}
-	_ = []string{
-		"github.com/go-swagger/go-swagger/cmd/swagger",
-		"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger",
-		"github.com/twitchtv/twirp/protoc-gen-twirp",
-	}
-)

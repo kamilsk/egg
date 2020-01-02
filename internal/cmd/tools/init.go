@@ -14,11 +14,11 @@ func NewInitCommand(cfg *gex.Config) *cobra.Command {
 			ctx, cancel := context.WithCancel(context.TODO())
 			defer cancel()
 
-			tools, err := cfg.Create()
+			repository, err := cfg.Create()
 			if err != nil {
 				return err
 			}
-			return tools.Add(ctx)
+			return repository.Add(ctx)
 		},
 	}
 	return cmd

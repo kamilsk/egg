@@ -11,7 +11,7 @@ import (
 func NewRegenCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "regen",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(*cobra.Command, []string) error {
 			path := filepath.Join(cfg.RootDir, cfg.ManifestName)
 			m, err := tool.NewParser(cfg.FS, cfg.ManagerType).Parse(path)
 			if err != nil {

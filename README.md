@@ -8,6 +8,8 @@
 
 ...
 
+Full description of the idea is available [here][design.page].
+
 ## 🏆 Motivation
 
 ...
@@ -30,14 +32,18 @@ $ egg make ...
 
 ```bash
 $ mkdir tools && cd tools
+# init a new toolset
 $ go mod init your.module/tools
 $ egg tools init
-# add golangci-lint to your toolset
+# add golangci-lint to tools.go
 $ egg tools add github.com/golangci/golangci-lint
-# add mockgen to your toolset and build it to bin/mockgen
+# add mockgen to tools.go and build it to bin/mockgen
 $ egg tools add --build github.com/golang/mock/mockgen
 # build tools to ${GOPATH}/bin/
 $ ROOT="${GOPATH}/" go generate tools.go
+# list the toolset
+$ egg tools list
+# mockgen golangci-lint
 ```
 
 ### egg vanity
@@ -91,5 +97,7 @@ made with ❤️ for everyone
 
 [build.icon]:       https://travis-ci.org/kamilsk/egg.svg?branch=master
 [build.page]:       https://travis-ci.org/kamilsk/egg
+
+[design.page]:      https://www.notion.so/octolab/egg-f716b80d4b184301b1db2e058f603dd0?r=0b753cbf767346f5a6fd51194829a2f3
 
 [promo.page]:       https://github.com/kamilsk/egg

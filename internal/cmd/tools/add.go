@@ -15,7 +15,7 @@ func NewAddCommand(cfg *gex.Config) *cobra.Command {
 	)
 	cmd := &cobra.Command{
 		Use: "add",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			if !build {
 				option |= tool.SkipBuild
 			}
@@ -23,11 +23,11 @@ func NewAddCommand(cfg *gex.Config) *cobra.Command {
 			ctx, cancel := context.WithCancel(context.WithValue(context.TODO(), tool.Option{}, option))
 			defer cancel()
 
-			tools, err := cfg.Create()
+			repository, err := cfg.Create()
 			if err != nil {
 				return err
 			}
-			return tools.Add(ctx, args...)
+			return repository.Add(ctx, args...)
 		},
 	}
 	cmd.Flags().BoolVar(&build, "build", false, "run build after add")
