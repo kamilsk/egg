@@ -7,12 +7,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var defaults = []string{
-	"github.com/golang/mock/mockgen",
-	"github.com/golangci/golangci-lint/cmd/golangci-lint",
-	"golang.org/x/tools/cmd/goimports",
-}
-
 func NewInitCommand(cfg *gex.Config) *cobra.Command {
 	cmd := &cobra.Command{
 		Use: "init",
@@ -24,7 +18,7 @@ func NewInitCommand(cfg *gex.Config) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			return tools.Add(ctx, defaults...)
+			return tools.Add(ctx)
 		},
 	}
 	return cmd

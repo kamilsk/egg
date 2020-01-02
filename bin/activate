@@ -46,7 +46,7 @@ up () {
 }
 
 tools () {
-    (cd "${ROOT}"/tools && make $@)
+    (cd "${ROOT%/}"/tools && make $@)
 }
 
 deactivate nondestructive
@@ -54,7 +54,7 @@ deactivate nondestructive
 _OLD_PATH="${PATH}"
 export BINPATH=$(realpath $(dirname $0))
 export PATH="${BINPATH}:${PATH}"
-export ROOT=$(dirname $(realpath $(dirname $0)))
+export ROOT=$(dirname $(realpath $(dirname $0)))/
 
 if [[ -z "${BINPATH_DISABLE_PROMPT:-}" ]]; then
     _OLD_PS1="${PS1:-}"

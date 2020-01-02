@@ -14,7 +14,37 @@
 
 ## 🤼‍♂️ How to
 
-...
+### egg deps
+
+```bash
+$ egg deps ...
+```
+
+### egg make
+
+```bash
+$ egg make ...
+```
+
+### egg tools
+
+```bash
+$ mkdir tools && cd tools
+$ go mod init your.module/tools
+$ egg tools init
+# add golangci-lint to your toolset
+$ egg tools add github.com/golangci/golangci-lint
+# add mockgen to your toolset and build it to bin/mockgen
+$ egg tools add --build github.com/golang/mock/mockgen
+# build tools to ${GOPATH}/bin/
+$ ROOT="${GOPATH}/" go generate tools.go
+```
+
+### egg vanity
+
+```bash
+$ egg vanity ...
+```
 
 ## 🧩 Installation
 
@@ -53,7 +83,7 @@ $ egg completion zsh  > /path/to/zsh-completions/_egg.zsh
 
 - [github.com/izumin5210/gex](https://github.com/izumin5210/gex)
   - [fork](https://github.com/izumin5210/gex/compare/master...kamilsk:extended)
-  - [replacement](https://github.com/kamilsk/egg/blob/f595909e1590aa4ffd286641491165c636690698/go.mod#L11)
+  - `replace github.com/izumin5210/gex => github.com/kamilsk/gex latest`
 
 ---
 

@@ -23,3 +23,20 @@ func NewRunCommand(cfg *gex.Config) *cobra.Command {
 	}
 	return cmd
 }
+
+var (
+	_ = []string{
+		"github.com/golang/mock/mockgen",
+		"github.com/golangci/golangci-lint/cmd/golangci-lint",
+		"golang.org/x/tools/cmd/goimports",
+	}
+	_ = []string{
+		"github.com/golang/protobuf/protoc-gen-go",
+		"github.com/gogo/protobuf/protoc-gen-gofast",
+	}
+	_ = []string{
+		"github.com/go-swagger/go-swagger/cmd/swagger",
+		"github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger",
+		"github.com/twitchtv/twirp/protoc-gen-twirp",
+	}
+)
