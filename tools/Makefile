@@ -22,18 +22,50 @@ env:
 	@echo "GOPROXY:     $(strip $(shell $(GO) env GOPROXY))"
 	@echo "MODULE:      $(MODULE)"
 
-.PHONY: clean
-clean:
-	@$(GO) clean -cache -modcache -testcache
-
 .PHONY: deps
 deps:
-	@$(GO) mod tidy && $(GO) mod vendor
+	@$(GO) mod tidy
+	@if [[ "$(shell $(GO) env GOFLAGS)" =~ -mod=vendor ]]; then $(GO) mod vendor; fi
+
+.PHONY: deps-clean
+deps-clean:
+	@$(GO) clean -modcache
+
+.PHONY: update
+update: selector = '.Require[] | select(.Indirect != true) | .Path'
+update:
+	@if command -v egg > /dev/null; then \
+		packages="$(shell egg deps list)"; \
+		$(GO) get -mod= -u $$packages; \
+	elif command -v jq > /dev/null; then \
+		packages="$(shell $(GO) mod edit -json | jq -r $(selector))"; \
+		$(GO) get -mod= -u $$packages; \
+	else \
+		packages="$(shell cat go.mod | grep -v '// indirect' | grep '\t' | awk '{print $$1}')"; \
+		$(GO) get -mod= -u $$packages; \
+	fi
+
+.PHONY: build
+build: install
+
+.PHONY: build-clean
+build-clean:
+	@$(GO) clean -cache
 
 .PHONY: install
 install:
-	@ROOT=$(dir $(BINPATH)) $(GO) generate ./tools.go
+	@ROOT=$(dir $(BINPATH)) $(GO) generate tools.go
 
-.PHONY: update
-update:
-	@$(GO) get -mod= -u $(shell egg deps list)
+.PHONY: install-clean
+install-clean:
+	@if command -v egg > /dev/null; then \
+		tools="$(shell egg tools list)"; \
+		for tool in $$tools; do rm -f $(BINPATH)/$$tool; done; \
+	else \
+		tools="$(shell cat tools.go | grep 'go:generate' | awk '{print $$NF}' | xargs basename)"; \
+		for tool in $$tools; do rm -f $(BINPATH)/$$tool; done; \
+	fi
+
+
+.PHONY: clean
+clean: build-clean deps-clean install-clean
