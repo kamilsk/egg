@@ -3,6 +3,7 @@
 > Extended go get - alternative for the standard "go get" with a few little but useful features.
 
 [![Build][build.icon]][build.page]
+[![Template][template.icon]][template.page]
 
 ## 💡 Idea
 
@@ -101,3 +102,6 @@ made with ❤️ for everyone
 [design.page]:      https://www.notion.so/octolab/egg-f716b80d4b184301b1db2e058f603dd0?r=0b753cbf767346f5a6fd51194829a2f3
 
 [promo.page]:       https://github.com/kamilsk/egg
+
+[template.page]:    https://github.com/octomation/go-tool
+[template.icon]:    https://img.shields.io/badge/template-go--tool-blue

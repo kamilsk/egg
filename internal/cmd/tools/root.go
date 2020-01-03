@@ -11,11 +11,10 @@ func New() *cobra.Command {
 		Short: "Manage tools",
 		Long:  "Manage tools.",
 	}
-	cfg := &gex.Config{
-		OutWriter: cmd.OutOrStdout(),
-		ErrWriter: cmd.ErrOrStderr(),
-		InReader:  cmd.InOrStdin(),
-	}
+	cfg := &(*gex.Default)
+	cfg.OutWriter = cmd.OutOrStdout()
+	cfg.ErrWriter = cmd.ErrOrStderr()
+	cfg.InReader = cmd.InOrStdin()
 	cmd.AddCommand(
 		NewAddCommand(cfg),
 		NewBuildCommand(cfg),

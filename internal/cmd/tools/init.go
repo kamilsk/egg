@@ -19,12 +19,12 @@ func NewInitCommand(cfg *gex.Config) *cobra.Command {
 			ctx, cancel := context.WithCancel(context.TODO())
 			defer cancel()
 
-			repository, err := cfg.Create()
 			if force {
 				path := filepath.Join(cfg.RootDir, cfg.ManifestName)
 				m := tool.NewManifest(nil, cfg.ManagerType)
 				return tool.NewWriter(cfg.FS).Write(path, m)
 			}
+			repository, err := cfg.Create()
 			if err != nil {
 				return err
 			}

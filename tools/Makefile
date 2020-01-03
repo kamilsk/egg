@@ -1,3 +1,5 @@
+# sourced by https://github.com/octomation/makefiles
+
 .DEFAULT_GOAL = install
 
 SHELL = /bin/bash -euo pipefail
