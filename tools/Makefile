@@ -4,25 +4,36 @@
 
 SHELL = /bin/bash -euo pipefail
 
-GO    = GOPRIVATE=$(GOPRIVATE) GOFLAGS=$(GOFLAGS) go
-
-BINPATH     = $(shell dirname $(PWD))/bin
+GO          = GOPRIVATE=$(GOPRIVATE) GOFLAGS=$(GOFLAGS) go
 GO111MODULE = on
 GOFLAGS     = -mod=vendor
 GOPRIVATE   = go.octolab.net
 GOPROXY     = direct
+LOCAL       = $(MODULE)
 MODULE      = $(shell $(GO) list -m)
+PACKAGES    = $(shell $(GO) list ./... 2> /dev/null)
+PATHS       = $(shell $(GO) list ./... 2> /dev/null | sed -e "s|$(MODULE)/\{0,1\}||g")
+TIMEOUT     = 1s
 
-export PATH := $(BINPATH):$(PATH)
+ifeq (, $(PACKAGES))
+	PACKAGES = $(MODULE)
+endif
 
-.PHONY: env
-env:
-	@echo "BINPATH:     $(BINPATH)"
+ifeq (, $(PATHS))
+	PATHS = .
+endif
+
+.PHONY: go-env
+go-env:
 	@echo "GO111MODULE: $(shell $(GO) env GO111MODULE)"
 	@echo "GOFLAGS:     $(strip $(shell $(GO) env GOFLAGS))"
 	@echo "GOPRIVATE:   $(strip $(shell $(GO) env GOPRIVATE))"
 	@echo "GOPROXY:     $(strip $(shell $(GO) env GOPROXY))"
+	@echo "LOCAL:       $(LOCAL)"
 	@echo "MODULE:      $(MODULE)"
+	@echo "PACKAGES:    $(PACKAGES)"
+	@echo "PATHS:       $(strip $(PATHS))"
+	@echo "TIMEOUT:     $(TIMEOUT)"
 
 .PHONY: deps
 deps:
@@ -46,6 +57,15 @@ update:
 		packages="$(shell cat go.mod | grep -v '// indirect' | grep '\t' | awk '{print $$1}')"; \
 		$(GO) get -mod= -u $$packages; \
 	fi
+
+BINPATH = $(shell dirname $(PWD))/bin
+LOCAL   = $(shell dirname $(MODULE))
+
+export PATH := $(BINPATH):$(PATH)
+
+.PHONY: tools-env
+tools-env:
+	@echo "BINPATH:     $(BINPATH)"
 
 .PHONY: build
 build: install
@@ -71,3 +91,9 @@ install-clean:
 
 .PHONY: clean
 clean: build-clean deps-clean install-clean
+
+.PHONY: env
+env: go-env tools-env
+
+.PHONY: refresh
+refresh: update deps install
