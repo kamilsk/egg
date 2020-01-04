@@ -72,9 +72,11 @@ $ wget -qO- https://bit.ly/-chicken- | sh
 ### Source
 
 ```bash
+# use standard go tools
 $ go get -u github.com/kamilsk/egg
-# or
+# or use egg tool
 $ egg tools add github.com/kamilsk/egg
+$ go mod edit -replace=github.com/izumin5210/gex=github.com/kamilsk/gex@latest
 ```
 
 ### Bash and Zsh completions
@@ -89,7 +91,7 @@ $ egg completion zsh  > /path/to/zsh-completions/_egg.zsh
 ### Patches
 
 - [github.com/izumin5210/gex](https://github.com/izumin5210/gex)
-  - [fork](https://github.com/izumin5210/gex/compare/master...kamilsk:extended)
+  - [differences from the upstream](https://github.com/izumin5210/gex/compare/master...kamilsk:extended)
   - `replace github.com/izumin5210/gex => github.com/kamilsk/gex latest`
 
 ---
