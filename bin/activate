@@ -52,9 +52,9 @@ tools () {
 deactivate nondestructive
 
 _OLD_PATH="${PATH}"
-export BINPATH=$(realpath $(dirname $0))
+export BINPATH=$(realpath $(dirname "${BASH_SOURCE[0]:-$0}"))
 export PATH="${BINPATH}:${PATH}"
-export ROOT=$(dirname $(realpath $(dirname $0)))/
+export ROOT=$(dirname "${BINPATH}")/
 
 if [[ -z "${BINPATH_DISABLE_PROMPT:-}" ]]; then
     _OLD_PS1="${PS1:-}"

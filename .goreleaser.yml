@@ -1,5 +1,8 @@
+---
+project_name: egg
+
 archives:
-- id: binary
+- id: egg
   files:
   - LICENSE
   format: tar.gz
@@ -12,15 +15,24 @@ archives:
 
 brews:
 - name: egg
-  description: Extended go get - alternative for the standard "go get" with a few little but useful features.
-  homepage: https://github.com/kamilsk/egg
   commit_author:
     name:  Kamil Samigullin
     email: kamil@samigullin.info
+  description: Extended go get - alternative for the standard "go get" with a few little but useful features.
   folder: Formula
+  homepage: https://github.com/kamilsk/egg
   github:
-    name:  homebrew-tap
     owner: kamilsk
+    name:  homebrew-tap
+  install: |
+    bin.install "egg"
+    output = Utils.popen_read("#{bin}/egg completion bash")
+    (bash_completion/"egg").write output
+    output = Utils.popen_read("#{bin}/egg completion zsh")
+    (zsh_completion/"_egg").write output
+    prefix.install_metafiles
+  test: |
+    system "#{bin}/egg --version"
 
 builds:
 - binary: egg
@@ -38,7 +50,6 @@ builds:
 checksum: { name_template: checksums.txt }
 
 release:
-  draft: false
   github:
-    name:  egg
     owner: kamilsk
+    name:  egg

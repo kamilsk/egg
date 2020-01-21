@@ -86,9 +86,9 @@ $ brew install kamilsk/tap/egg
 ### Binary
 
 ```bash
-$ curl -sSL https://bit.ly/-chicken- | sh
+$ curl -sSfL https://bit.ly/-chicken- | sh
 # or
-$ wget -qO- https://bit.ly/-chicken- | sh
+$ wget -qO-  https://bit.ly/-chicken- | sh
 ```
 
 ### Source
