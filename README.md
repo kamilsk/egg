@@ -1,6 +1,6 @@
 > # 🐣 egg
 >
-> Extended go get - alternative for the standard "go get" with a few little but useful features.
+> Extended go get - alternative for the standard `go get` with a few little but useful features.
 
 [![Build][build.icon]][build.page]
 [![Template][template.icon]][template.page]
