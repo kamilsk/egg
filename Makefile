@@ -4,15 +4,14 @@
 
 SHELL = /bin/bash -euo pipefail
 
-GO          = GOPRIVATE=$(GOPRIVATE) GOFLAGS=$(GOFLAGS) go
 GO111MODULE = on
 GOFLAGS     = -mod=vendor
 GOPRIVATE   = go.octolab.net
 GOPROXY     = direct
 LOCAL       = $(MODULE)
-MODULE      = $(shell $(GO) list -m)
-PACKAGES    = $(shell $(GO) list ./... 2> /dev/null)
-PATHS       = $(shell $(GO) list ./... 2> /dev/null | sed -e "s|$(MODULE)/\{0,1\}||g")
+MODULE      = `go list -m`
+PACKAGES    = `go list ./... 2> /dev/null`
+PATHS       = $(shell echo $(PACKAGES) | sed -e "s|$(MODULE)/\{0,1\}||g")
 TIMEOUT     = 1s
 
 ifeq (, $(PACKAGES))
@@ -23,12 +22,17 @@ ifeq (, $(PATHS))
 	PATHS = .
 endif
 
+export GO111MODULE := $(GO111MODULE)
+export GOFLAGS     := $(GOFLAGS)
+export GOPRIVATE   := $(GOPRIVATE)
+export GOPROXY     := $(GOPROXY)
+
 .PHONY: go-env
 go-env:
-	@echo "GO111MODULE: $(shell $(GO) env GO111MODULE)"
-	@echo "GOFLAGS:     $(strip $(shell $(GO) env GOFLAGS))"
-	@echo "GOPRIVATE:   $(strip $(shell $(GO) env GOPRIVATE))"
-	@echo "GOPROXY:     $(strip $(shell $(GO) env GOPROXY))"
+	@echo "GO111MODULE: `go env GO111MODULE`"
+	@echo "GOFLAGS:     $(strip `go env GOFLAGS`)"
+	@echo "GOPRIVATE:   $(strip `go env GOPRIVATE`)"
+	@echo "GOPROXY:     $(strip `go env GOPROXY`)"
 	@echo "LOCAL:       $(LOCAL)"
 	@echo "MODULE:      $(MODULE)"
 	@echo "PACKAGES:    $(PACKAGES)"
@@ -37,34 +41,36 @@ go-env:
 
 .PHONY: deps
 deps:
-	@$(GO) mod tidy
-	@if [[ "$(shell $(GO) env GOFLAGS)" =~ -mod=vendor ]]; then $(GO) mod vendor; fi
+	@go mod tidy
+	@if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi
 
 .PHONY: deps-clean
 deps-clean:
-	@$(GO) clean -modcache
+	@go clean -modcache
 
 .PHONY: update
 update: selector = '.Require[] | select(.Indirect != true) | .Path'
 update:
 	@if command -v egg > /dev/null; then \
-		packages="$(shell egg deps list)"; \
-		$(GO) get -mod= -u $$packages; \
+		packages="`egg deps list`"; \
+		go get -mod= -u $$packages; \
 	elif command -v jq > /dev/null; then \
-		packages="$(shell $(GO) mod edit -json | jq -r $(selector))"; \
-		$(GO) get -mod= -u $$packages; \
+		packages="`go mod edit -json | jq -r $(selector)`"; \
+		go get -mod= -u $$packages; \
 	else \
 		packages="$(shell cat go.mod | grep -v '// indirect' | grep '\t' | awk '{print $$1}')"; \
-		$(GO) get -mod= -u $$packages; \
+		go get -mod= -u $$packages; \
 	fi
 
-BINARY  = $(BINPATH)/$(shell basename $(MODULE))
+BINARY  = $(BINPATH)/$(shell basename $(MAIN))
 BINPATH = $(PWD)/bin
 COMMIT  = $(shell git rev-parse --verify HEAD)
 DATE    = $(shell date +%Y-%m-%dT%T%Z)
 LDFLAGS = -ldflags "-s -w -X main.commit=$(COMMIT) -X main.date=$(DATE)"
+MAIN    = $(MODULE)
 
-export PATH := $(BINPATH):$(PATH)
+export GOBIN := $(BINPATH)
+export PATH  := $(BINPATH):$(PATH)
 
 .PHONY: build-env
 build-env:
@@ -72,16 +78,18 @@ build-env:
 	@echo "BINPATH:     $(BINPATH)"
 	@echo "COMMIT:      $(COMMIT)"
 	@echo "DATE:        $(DATE)"
+	@echo "GOBIN:       `go env GOBIN`"
 	@echo "LDFLAGS:     $(LDFLAGS)"
+	@echo "MAIN:        $(MAIN)"
+	@echo "PATH:        $$PATH"
 
 .PHONY: build
-build: MAIN = .
 build:
-	@$(GO) build -o $(BINARY) $(LDFLAGS) $(MAIN)
+	@go build -o $(BINARY) $(LDFLAGS) $(MAIN)
 
 .PHONY: build-clean
 build-clean:
-	@$(GO) clean -cache
+	@go clean -cache
 
 .PHONY: install
 install: build
@@ -92,23 +100,23 @@ install-clean:
 
 .PHONY: test
 test:
-	@$(GO) test -race -timeout $(TIMEOUT) $(PACKAGES)
+	@go test -race -timeout $(TIMEOUT) $(PACKAGES)
 
 .PHONY: test-clean
 test-clean:
-	@$(GO) clean -testcache
+	@go clean -testcache
 
 .PHONY: test-with-coverage
 test-with-coverage:
-	@$(GO) test -cover -timeout $(TIMEOUT) $(PACKAGES) | column -t | sort -r
+	@go test -cover -timeout $(TIMEOUT) $(PACKAGES) | column -t | sort -r
 
 .PHONY: test-with-coverage-profile
 test-with-coverage-profile:
-	@$(GO) test -cover -covermode count -coverprofile c.out -timeout $(TIMEOUT) $(PACKAGES)
+	@go test -cover -covermode count -coverprofile c.out -timeout $(TIMEOUT) $(PACKAGES)
 
 .PHONY: dist
 dist:
-	@godownloader .goreleaser.yml > .github/install.sh
+	@godownloader .goreleaser.yml > bin/install
 
 .PHONY: format
 format:
@@ -116,7 +124,7 @@ format:
 
 .PHONY: generate
 generate:
-	@$(GO) generate $(PACKAGES)
+	@go generate $(PACKAGES)
 
 
 .PHONY: clean
