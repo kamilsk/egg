@@ -35,14 +35,14 @@ func (t Type) String() string {
 
 // DetectType detects a current Mode and sets a root directory.
 func DetectType(workDir string, fs afero.Fs, exec *execx.Executor) (t Type, rootDir string) {
-	root, err := FindRoot(workDir, fs, "Gopkg.toml")
-	if err == nil {
-		return TypeDep, root
-	}
-
 	dir, ok := lookupMod(workDir, fs, exec)
 	if ok {
 		return TypeModules, dir
+	}
+
+	root, err := FindRoot(workDir, fs, "Gopkg.toml")
+	if err == nil {
+		return TypeDep, root
 	}
 
 	return TypeUnknown, ""

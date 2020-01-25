@@ -6,7 +6,7 @@ github.com/davecgh/go-spew/spew
 github.com/inconshreveable/mousetrap
 # github.com/izumin5210/execx v0.1.0
 github.com/izumin5210/execx
-# github.com/izumin5210/gex v0.6.0 => github.com/kamilsk/gex v0.6.0-e3
+# github.com/izumin5210/gex v0.6.0 => github.com/kamilsk/gex v0.6.0-e4
 github.com/izumin5210/gex
 github.com/izumin5210/gex/pkg/manager
 github.com/izumin5210/gex/pkg/manager/dep
@@ -25,6 +25,7 @@ github.com/spf13/cobra
 github.com/spf13/pflag
 # github.com/stretchr/testify v1.4.0
 github.com/stretchr/testify/assert
+github.com/stretchr/testify/require
 # go.octolab.org v0.0.5
 go.octolab.org/os/shell
 # go.octolab.org/toolkit/cli v0.0.6

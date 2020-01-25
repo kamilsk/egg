@@ -45,12 +45,12 @@ var (
 package tools
 
 import (
-{{- range $t := .Tools }}
-	_ "{{ $t }}"
+{{- range $tool := .Tools }}
+	_ "{{ $tool }}"
 {{- end }}
 )
-{{ range $t := .Tools }}
-//go:generate go build -v -o=${ROOT}bin/{{ $t.Name }} {{ if $.ManagerType.Vendor }}./vendor/{{ end }}{{ $t }}
+{{ range $tool := .Tools }}
+//go:generate go install {{ if $.ManagerType.Vendor }}./vendor/{{ end }}{{ $tool }}
 {{- end }}
 `))
 )
