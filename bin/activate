@@ -55,9 +55,13 @@ deactivate () {
         unset -f deactivate
         unset -f get
         unset -f realpath
-        unset -f tools
         unset -f up
     fi
+}
+
+deps () {
+    go mod tidy
+    if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi
 }
 
 get () {
@@ -72,14 +76,9 @@ realpath () {
     echo "$(cd `dirname ${1}` && pwd)/${1}"
 }
 
-tools () {
-    (cd "${_ROOT%/}"/tools && make $@)
-}
-
 up () {
     get -u $@
-    go mod tidy
-    if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi
+    deps
 }
 
 deactivate nondestructive
