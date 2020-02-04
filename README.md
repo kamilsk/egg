@@ -61,7 +61,10 @@ $ egg tools add github.com/golangci/golangci-lint
 $ egg tools add --build github.com/golang/mock/mockgen
 
 # install tools to ${GOPATH}/bin
-$ GOBIN="${GOPATH}/bin" go generate tools.go
+$ export GOBIN="${GOPATH}/bin"
+$ go generate tools.go
+# do the same thing
+$ egg tools install
 
 # list the toolset
 $ egg tools list
