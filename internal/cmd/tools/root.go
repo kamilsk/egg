@@ -19,6 +19,7 @@ func New() *cobra.Command {
 		NewAddCommand(cfg),
 		NewBuildCommand(cfg),
 		NewInitCommand(cfg),
+		NewInstallCommand(cfg),
 		NewListCommand(cfg),
 		NewRegenCommand(cfg),
 		NewRunCommand(cfg),
