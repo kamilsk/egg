@@ -49,18 +49,17 @@ deps-clean:
 	@go clean -modcache
 
 .PHONY: update
-update: selector = '.Require[] | select(.Indirect != true) | .Path'
+update: selector = '{{if not (or .Main .Indirect)}}{{.Path}}{{end}}'
 update:
 	@if command -v egg > /dev/null; then \
 		packages="`egg deps list`"; \
-		go get -mod= -u $$packages; \
-	elif command -v jq > /dev/null; then \
-		packages="`go mod edit -json | jq -r $(selector)`"; \
-		go get -mod= -u $$packages; \
 	else \
-		packages="$(shell cat go.mod | grep -v '// indirect' | grep '\t' | awk '{print $$1}')"; \
-		go get -mod= -u $$packages; \
-	fi
+		packages="`go list -f $(selector) -m all`"; \
+	fi; go get -mod= -u $$packages
+
+.PHONY: update-all
+update-all:
+	@go get -mod= -u ./...
 
 BINARY  = $(BINPATH)/$(shell basename $(MAIN))
 BINPATH = $(PWD)/bin
