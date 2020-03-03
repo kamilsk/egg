@@ -60,7 +60,7 @@ deactivate () {
 }
 
 deps () {
-    go mod tidy
+    go mod download
     if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi
 }
 

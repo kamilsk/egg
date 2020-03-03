@@ -98,9 +98,9 @@ $ wget -qO-  https://bit.ly/install-chicken | sh
 
 ```bash
 # use standard go tools
-$ go get -u github.com/kamilsk/egg
+$ go get github.com/kamilsk/egg@latest
 # or use egg tool
-$ egg tools add github.com/kamilsk/egg
+$ egg tools add github.com/kamilsk/egg@latest
 
 $ go mod edit -replace=github.com/izumin5210/gex=github.com/kamilsk/gex@latest
 ```
@@ -129,16 +129,11 @@ $ egg completion zsh  > /path/to/zsh-completions/_egg.zsh
 
 made with ❤️ for everyone
 
-[build.icon]:       https://travis-ci.org/kamilsk/egg.svg?branch=master
 [build.page]:       https://travis-ci.org/kamilsk/egg
-
+[build.icon]:       https://travis-ci.org/kamilsk/egg.svg?branch=master
 [design.page]:      https://www.notion.so/octolab/egg-f716b80d4b184301b1db2e058f603dd0?r=0b753cbf767346f5a6fd51194829a2f3
-
 [promo.page]:       https://github.com/kamilsk/egg
-
 [research.page]:    https://github.com/under-the-hood/egg
-
 [rfc.page]:         https://github.com/octolab/rfc/pulls?utf8=✓&q=is%3Apr+label%3Akamilsk%2Fegg+
-
 [template.page]:    https://github.com/octomation/go-tool
 [template.icon]:    https://img.shields.io/badge/template-go--tool-blue
