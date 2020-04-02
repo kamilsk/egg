@@ -96,7 +96,7 @@ _OLD_PS1="${PS1:-}"
 
 export GO111MODULE=on
 export GOBIN="${_BINPATH}"
-export GOFLAGS=-mod=vendor
+export GOFLAGS=-mod=
 export GOPRIVATE=go.octolab.net
 export GOPROXY=direct
 export PATH="${_BINPATH}:${PATH}"

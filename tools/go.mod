@@ -3,8 +3,8 @@ module github.com/kamilsk/egg/tools
 go 1.11
 
 require (
-	github.com/golang/mock v1.4.1
-	github.com/golangci/golangci-lint v1.23.7
+	github.com/golang/mock v1.4.3
+	github.com/golangci/golangci-lint v1.24.0
 	golang.org/x/tools v0.3.3
 )
 

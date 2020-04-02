@@ -8,7 +8,7 @@
 ## 💡 Idea
 
 ```bash
-$ egg tools add github.com/golangci/golangci-lint@latest
+$ egg tools  add golang.org/x/tools/cmd/goimports@latest
 
 $ egg binary get github.com/goreleaser/goreleaser@latest
 ```
@@ -56,7 +56,7 @@ $ go mod init your.module/tools
 $ egg tools init
 
 # add golangci-lint to tools.go
-$ egg tools add github.com/golangci/golangci-lint
+$ egg tools add github.com/golangci/golangci-lint/cmd/golangci-lint
 # add mockgen to tools.go and build it to bin/mockgen
 $ egg tools add --build github.com/golang/mock/mockgen
 
