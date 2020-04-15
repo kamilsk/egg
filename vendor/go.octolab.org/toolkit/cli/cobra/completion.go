@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
 	"go.octolab.org/toolkit/cli/internal/os/shell"
 )
 

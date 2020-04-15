@@ -65,7 +65,8 @@ deps () {
 }
 
 get () {
-    go get -mod= $@
+    if [[ $(go version) == *1.1[1-3]* ]]; then go get -d -mod= $@; else go get -d $@; fi
+    deps
 }
 
 realpath () {
@@ -76,10 +77,7 @@ realpath () {
     echo "$(cd `dirname ${1}` && pwd)/${1}"
 }
 
-up () {
-    get -u $@
-    deps
-}
+up () { get -u $@ }
 
 deactivate nondestructive
 
@@ -96,7 +94,7 @@ _OLD_PS1="${PS1:-}"
 
 export GO111MODULE=on
 export GOBIN="${_BINPATH}"
-export GOFLAGS=-mod=
+export GOFLAGS=-mod=vendor
 export GOPRIVATE=go.octolab.net
 export GOPROXY=direct
 export PATH="${_BINPATH}:${PATH}"
