@@ -21,7 +21,8 @@ func TestAddCommand_GoModWithDep(t *testing.T) {
 	golden, err := os.Stat(filepath.Join(issue, expected))
 	require.NoError(t, err)
 
-	buf, cfg := new(bytes.Buffer), &(*gex.Default)
+	copied := *gex.Default
+	buf, cfg := new(bytes.Buffer), &copied
 	cfg.FS = afero.NewMemMapFs()
 	cfg.ErrWriter = buf
 	cfg.OutWriter = buf

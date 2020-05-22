@@ -11,7 +11,8 @@ func New() *cobra.Command {
 		Short: "Manage tools",
 		Long:  "Manage tools.",
 	}
-	cfg := &(*gex.Default)
+	copied := *gex.Default
+	cfg := &copied
 	cfg.OutWriter = cmd.OutOrStdout()
 	cfg.ErrWriter = cmd.ErrOrStderr()
 	cfg.InReader = cmd.InOrStdin()
