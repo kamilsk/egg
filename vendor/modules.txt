@@ -12,7 +12,7 @@ github.com/izumin5210/gex/pkg/manager
 github.com/izumin5210/gex/pkg/manager/dep
 github.com/izumin5210/gex/pkg/manager/mod
 github.com/izumin5210/gex/pkg/tool
-# github.com/pkg/errors v0.8.1
+# github.com/pkg/errors v0.9.1
 github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
@@ -26,6 +26,10 @@ github.com/spf13/pflag
 # github.com/stretchr/testify v1.5.1
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
+# go.octolab.org v0.0.26
+go.octolab.org/errors
+go.octolab.org/safe
+go.octolab.org/unsafe
 # go.octolab.org/toolkit/cli v0.0.9
 go.octolab.org/toolkit/cli/cobra
 go.octolab.org/toolkit/cli/internal/os/shell
