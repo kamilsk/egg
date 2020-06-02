@@ -11,7 +11,7 @@ import (
 
 // New returns the new root command.
 func New() *cobra.Command {
-	cmd := &cobra.Command{
+	command := cobra.Command{
 		Use:   "egg",
 		Short: "Extended go get",
 		Long:  "Extended go get - alternative for the standard `go get` with a few little but useful features.",
@@ -19,6 +19,6 @@ func New() *cobra.Command {
 		SilenceErrors: false,
 		SilenceUsage:  true,
 	}
-	cmd.AddCommand(deps.New(), make.New(), tools.New(), vanity.New())
-	return cmd
+	command.AddCommand(deps.New(), make.New(), tools.New(), vanity.New())
+	return &command
 }

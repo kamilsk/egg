@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o pipefail
+
 deactivate () {
     unset _ARCH
     unset _BINPATH
@@ -102,12 +104,12 @@ _OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 _ARCH=$(uname -m | tr '[:upper:]' '[:lower:]')
 _BINPATH=$(_realpath $(dirname "${BASH_SOURCE[0]:-$0}"))/"${_OS}/${_ARCH}"
 
-_OLD_GO111MODULE="${GO111MODULE}"
-_OLD_GOBIN="${GOBIN}"
-_OLD_GOFLAGS="${GOFLAGS}"
-_OLD_GOPRIVATE="${GOPRIVATE}"
-_OLD_GOPROXY="${GOPROXY}"
-_OLD_PATH="${PATH}"
+_OLD_GO111MODULE="${GO111MODULE:-}"
+_OLD_GOBIN="${GOBIN:-}"
+_OLD_GOFLAGS="${GOFLAGS:-}"
+_OLD_GOPRIVATE="${GOPRIVATE:-}"
+_OLD_GOPROXY="${GOPROXY:-}"
+_OLD_PATH="${PATH:-}"
 _OLD_PS1="${PS1:-}"
 
 export GO111MODULE=on

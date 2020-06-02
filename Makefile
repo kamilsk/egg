@@ -188,6 +188,11 @@ toolset:
 		go generate tools.go; \
 	)
 
+.PHONY: hooks
+hooks:
+	@ls .git/hooks | grep -v .sample | sed 's|.*|.git/hooks/&|' | xargs rm -f || true
+	@for hook in $(GIT_HOOKS); do cp githooks/$$hook .git/hooks/; done
+
 ifdef GO_VERSIONS
 
 define go_tpl
@@ -204,11 +209,6 @@ render_go_tpl = $(eval $(call go_tpl,$(version)))
 $(foreach version,$(GO_VERSIONS),$(render_go_tpl))
 
 endif
-
-.PHONY: hooks
-hooks:
-	@ls .git/hooks | grep -v .sample | sed 's|.*|.git/hooks/&|' | xargs rm -f || true
-	@for hook in $(GIT_HOOKS); do cp githooks/$$hook .git/hooks/; done
 
 
 .PHONY: init
